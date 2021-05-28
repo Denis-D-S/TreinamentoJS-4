@@ -1,0 +1,47 @@
+<meta charset="utf-8">
+<canvas width="600" height="400"></canvas>
+
+<script type="text/javascript">
+	
+	var tela = document.querySelector ("canvas");
+	var pincel = tela.getContext ("2d");
+
+	pincel.fillStyle = "lightgray";
+	pincel.fillRect (0,0,600,400);
+
+	var raio = 10;
+
+	function desenhaCirculo (x,y,raio,cor) {
+		pincel.fillStyle = cor;
+		pincel.beginPath ();
+		pincel.arc (x,y,raio,0, 2*Math.PI);
+		pincel.fill();
+	}
+
+
+	desenhaCirculo (300,200,raio + 20, "red");
+	desenhaCirculo (300,200,raio + 10, "white");
+	desenhaCirculo (300,200,raio, "red");
+
+	function dispara (evento){
+
+		//como a gente está criando uma fábrica que funciona a partir de um evento (que é a posição clicada pelo mouse), então óbvio que temos que começar primeiro capitando ONDE que foi clicado o mouse. Fazemos isso usando as 2 variáveis abaixo:
+		var x = evento.pageX - tela.offsetLeft;
+		var y = evento.pageY - tela.offsetTop;
+
+		// e agora vamos criar as condicionais de "quando acertamos o alvo, quando que clicamos no lugar certo"
+
+		//como o raio é 10, então é considerado que acertamos em qualquer ponto que seja x+10 ou x-10, e em qualquer ponto que seja y+10 e y-10. Pois este éo raio do circulo do alvo.
+
+		if (x>300 - raio && x<300 + raio && y>200-raio && y< 200 + raio) {
+
+			alert ("Acertou!");
+		}
+
+	}
+
+	tela.onclick =dispara;
+
+
+
+</script>
